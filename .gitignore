@@ -17,3 +17,5 @@ pom.xml.asc
 .hgignore
 .hg/
 
+# Go
+*.exe
