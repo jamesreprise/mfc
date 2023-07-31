@@ -1,3 +1,3 @@
-module example.com/m
+module mfc/client
 
 go 1.20
