@@ -8,7 +8,7 @@
   {:players (new-players players)
    :turn (nth (rand-nth (into [] players)) 0)})
 
-(defn game [request]
+(defn game [_]
   {:status 200
    :headers {"Content-Type" "application/json"}
    :body (json/write-str (new-game {"p1" {:piece :car} "p2" {:piece :hat}}))})
