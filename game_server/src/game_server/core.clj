@@ -45,20 +45,28 @@
    39 :navy/two})
 
 (defn roll [pos]
-  (mod (+ pos (+ 1 (rand-int 5))) 40))
+  (mod (+ pos (+ 1 (rand-int 6))) 40))
 
 (defn land [pos]
   (fn [game] game))
 
+(defn current-player [game]
+  (get (:players game) (get (:order game) (:current-player game))))
+
 (defn turn [game]
-  ((land (roll (:pos (:turn game)))) game))
+  (assoc (assoc ((land (roll (:position (current-player game)))) game) :current-player (mod (+ 1 (:current-player game)) (count (:order game)))) :turn (+ 1 (:turn game))))
 
 (defn new-players [players]
   (into {} (map (fn [p] {(key p) (merge {:bux 1500 :position 0} (val p))}) players)))
 
+(defn create-order [players]
+  (shuffle (keys players)))
+
 (defn new-game [players]
   {:players (new-players players)
-   :turn (nth (rand-nth (into [] players)) 0)})
+   :order (create-order players)
+   :current-player 0
+   :turn 0})
 
 (defn game [_]
   {:status 200
