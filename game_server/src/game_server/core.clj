@@ -53,8 +53,17 @@
 (defn current-player [game]
   (get (:players game) (get (:order game) (:current-player game))))
 
+(defn increment-turn-counter [game]
+  (update game :turn + 1))
+
+(defn next-player [game]
+  (assoc game :current-player (mod (+ 1 (:current-player game)) (count (:order game)))))
+
 (defn turn [game]
-  (assoc (assoc ((land (roll (:position (current-player game)))) game) :current-player (mod (+ 1 (:current-player game)) (count (:order game)))) :turn (+ 1 (:turn game))))
+  (-> game
+      ((land (roll (:position (current-player game)))))
+      increment-turn-counter
+      next-player))
 
 (defn new-players [players]
   (into {} (map (fn [p] {(key p) (merge {:bux 1500 :position 0} (val p))}) players)))
