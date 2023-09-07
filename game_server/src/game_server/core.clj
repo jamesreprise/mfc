@@ -1,5 +1,5 @@
 (ns game-server.core
-  (:require [clojure.data.json :as json]))
+  (:require [cheshire.core :as cheshire]))
 
 (def board
   {-1 :jail/in
@@ -80,5 +80,5 @@
 (defn game [_]
   {:status 200
    :headers {"Content-Type" "application/json"}
-   :body (json/write-str (new-game {"p1" {:piece :car} "p2" {:piece :hat}}))})
+   :body (cheshire/generate-string (new-game {"p1" {:piece :car} "p2" {:piece :hat}}))})
 
