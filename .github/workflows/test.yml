@@ -14,4 +14,4 @@ jobs:
     - run: |
         nix develop
         cd game_server
-        lein test
+        lein kaocha
