@@ -47,7 +47,7 @@
 (defn roll [pos]
   (mod (+ pos (+ 1 (rand-int 6))) 40))
 
-(defn land [pos]
+(defn land [_]
   (fn [game] game))
 
 (defn current-player [game]

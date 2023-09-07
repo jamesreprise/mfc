@@ -1,5 +1,5 @@
 (ns game-server.core-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [deftest is testing]]
             [game-server.core :as game-server]
             [org.httpkit.server :as http-server]
             [org.httpkit.client :as http-client]
