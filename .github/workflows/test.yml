@@ -1,0 +1,17 @@
+name: "Test"
+on:
+  pull_request:
+  push:
+jobs:
+  test-game-server:
+    name: Test Game Server
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v22
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - run: |
+        nix develop
+        cd game_server
+        lein test

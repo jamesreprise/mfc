@@ -6,12 +6,15 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, flake-utils, nixpkgs }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let pkgs = nixpkgs.legacyPackages.${system}; in
+  outputs = { flake-utils, nixpkgs, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        let pkgs = import nixpkgs { inherit system; }; 
+        in
         {
-          devShells.default = import ./mfc.nix { inherit pkgs; };
+          devShells.default = pkgs.mkShell {
+            name = "MFC Shell";
+            buildInputs = with pkgs; [ clojure leiningen ];
+          };
         } 
       );
 }
