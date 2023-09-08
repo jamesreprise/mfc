@@ -1,6 +1,6 @@
-(ns game-server.core-test
+(ns game_server.core-test
   (:require [clojure.test :refer [deftest is testing]]
-            [game-server.core :as game-server]
+            [game_server.core :as game-server]
             [org.httpkit.server :as http-server]
             [org.httpkit.client :as http-client]
             [cheshire.core :as cheshire]))
