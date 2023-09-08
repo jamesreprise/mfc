@@ -4,10 +4,11 @@ on:
   push:
 jobs:
   test-game-server:
-    name: Test Game Server
+    name: Test Game Server.
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - uses: DeterminateSystems/magic-nix-cache-action@main
     - uses: cachix/install-nix-action@v22
       with:
         nix_path: nixpkgs=channel:nixos-unstable
