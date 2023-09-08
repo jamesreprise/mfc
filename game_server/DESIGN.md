@@ -2,7 +2,6 @@
 ## Structures
 ### Game State
 Record of:
-* Board state
 * Player states
 * Bank state (if we do limited resources)
 * Configuration
