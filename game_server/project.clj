@@ -6,6 +6,8 @@
                  [cheshire "5.11.0"]
                  [ring "1.10.0"]
                  [http-kit "2.3.0"]]
+  :main game_server.core
+  :aot [game_server.core]
   :profiles {:kaocha {:dependencies [[lambdaisland/kaocha "1.86.1355"]]}}
   :aliases {"kaocha" ["with-profile" "+kaocha" "run" "-m" "kaocha.runner"]}
   :ring {:handler game-server.core/game}

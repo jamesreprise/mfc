@@ -1,5 +1,7 @@
-(ns game-server.core
-  (:require [cheshire.core :as cheshire]))
+(ns game_server.core
+  (:require [cheshire.core :as cheshire]
+            [org.httpkit.server :as http-server])
+  (:gen-class))
 
 (def board
   {-1 :jail/in
@@ -82,3 +84,5 @@
    :headers {"Content-Type" "application/json"}
    :body (cheshire/generate-string (new-game {"p1" {:piece :car} "p2" {:piece :hat}}))})
 
+(defn -main [& _]
+  (http-server/run-server game {:port 3000}))
