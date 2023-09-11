@@ -1,6 +1,11 @@
 (ns game_server.core
-  (:require [cheshire.core :as cheshire]
-            [org.httpkit.server :as http-server])
+  (:require
+   [clojure.tools.logging :as log]
+   [cheshire.core :as cheshire]
+   [org.httpkit.server :as http-server]
+   [compojure.core :refer [GET defroutes]]
+   [compojure.route :as route]
+   [compojure.handler :as handler])
   (:gen-class))
 
 (def board
@@ -79,10 +84,27 @@
    :current-player 0
    :turn 0})
 
-(defn game [_]
-  {:status 200
+(defn response [status map]
+  {:status status
    :headers {"Content-Type" "application/json"}
-   :body (cheshire/generate-string (new-game {"p1" {:piece :car} "p2" {:piece :hat}}))})
+   :body (cheshire/generate-string map)})
+
+(def example-2p-game
+  (new-game {"p1" {:piece :car} "p2" {:piece :hat}}))
+
+(defn game [_]
+  (response 200 example-2p-game))
+
+(defroutes server-routes
+  (GET "/" [] game)
+  (GET "/turn" [] (response 200 (turn example-2p-game)))
+  (GET "/turn2" [] (response 200 (turn (turn example-2p-game))))
+  (route/not-found (response 404 {:status 404 :error "Not Found"})))
+
+(def server
+  (-> (handler/site server-routes)))
 
 (defn -main [& _]
-  (http-server/run-server game {:port 3000}))
+  (log/info "Loading...")
+  (http-server/run-server server {:port 3000})
+  (log/info "READY"))
