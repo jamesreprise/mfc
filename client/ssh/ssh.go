@@ -1,12 +1,15 @@
 package main
 
 import (
+	"mfc/client/cli"
+
 	"errors"
 	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/log"
 	"github.com/charmbracelet/ssh"
 	"github.com/charmbracelet/wish"
@@ -18,7 +21,11 @@ const (
 )
 
 func main() {
-	server, err := wish.NewServer(wish.WithAddress(fmt.Sprint(host, ":", port)))
+	// cli := tea.NewProgram(cli.Model())
+	server, err := wish.NewServer(
+		wish.WithAddress(fmt.Sprint(host, ":", port)),
+		// wish.WithMiddleware(cli)
+	)
 	if err != nil {
 		println("Failed to create SSH server.")
 	}
