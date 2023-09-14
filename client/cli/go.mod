@@ -1,4 +1,4 @@
-module mfc/client
+module mfc/client/cli
 
 go 1.20
 

@@ -3,8 +3,8 @@ on:
   pull_request:
   push:
 jobs:
-  test-game-server:
-    name: Test Game Server.
+  test-mfc-server:
+    name: Test MFC Server.
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -14,5 +14,5 @@ jobs:
     - uses: DeterminateSystems/magic-nix-cache-action@main
     - run: |
         nix develop
-        cd game_server
+        cd server
         lein kaocha

@@ -1,4 +1,4 @@
-module mfc/ssh_server
+module mfc/client/ssh
 
 go 1.17
 

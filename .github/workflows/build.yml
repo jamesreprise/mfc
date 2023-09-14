@@ -3,8 +3,8 @@ on:
   pull_request:
   push:
 jobs:
-  build-game-server:
-    name: Build Game Server.
+  build-mfc-server:
+    name: Build MFC Server.
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -14,8 +14,8 @@ jobs:
     - uses: DeterminateSystems/magic-nix-cache-action@main
     - run: |
         nix develop
-        cd game_server
+        cd server
         lein uberjar
-        java -jar target/game_server-*standalone*&
+        java -jar target/mfc-*standalone*&
         sleep 5
         curl -f http://localhost:3000

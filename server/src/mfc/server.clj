@@ -1,4 +1,4 @@
-(ns game_server.core
+(ns mfc.server
   (:require
    [clojure.tools.logging :as log]
    [cheshire.core :as cheshire]

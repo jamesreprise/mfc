@@ -1,3 +1,3 @@
-# game_server
+# MFC Server
 
 Game controller with which clients communicate.
