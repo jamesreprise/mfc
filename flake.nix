@@ -14,9 +14,10 @@
           devShells.default = pkgs.mkShell {
             name = "MFC Shell";
             buildInputs = with pkgs; [ 
-              clojure leiningen 
-              curl openjdk 
-            ];
+              clojure leiningen openjdk
+              go 
+              curl 
+           ];
           };
         } 
       );

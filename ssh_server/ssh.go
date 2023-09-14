@@ -14,11 +14,11 @@ import (
 
 const (
 	host = "localhost"
-	port = "7777"
+	port = 7777
 )
 
 func main() {
-	server, err := wish.NewServer(wish.WithAddress(fmt.Sprint("%s:%d", host, port)))
+	server, err := wish.NewServer(wish.WithAddress(fmt.Sprint(host, ":", port)))
 	if err != nil {
 		println("Failed to create SSH server.")
 	}
