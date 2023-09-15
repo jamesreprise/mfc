@@ -97,8 +97,6 @@
 
 (defroutes server-routes
   (GET "/" [] game)
-  (GET "/turn" [] (response 200 (turn example-2p-game)))
-  (GET "/turn2" [] (response 200 (turn (turn example-2p-game))))
   (route/not-found (response 404 {:status 404 :error "Not Found"})))
 
 (def server
