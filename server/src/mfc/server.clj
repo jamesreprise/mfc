@@ -103,6 +103,6 @@
   (-> (handler/site server-routes)))
 
 (defn -main [& _]
-  (log/info "Loading...")
+  (log/info "LOADING...")
   (http-server/run-server server {:port 3000})
   (log/info "READY"))
