@@ -1,0 +1,21 @@
+name: "Run."
+on:
+  pull_request:
+  push:
+jobs:
+  run-mfc-server:
+    name: Run MFC Server.
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v22
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - run: |
+        nix develop
+        cd server
+        lein uberjar
+        java -jar target/mfc-*standalone*&
+        sleep 5
+        curl -f http://localhost:3000
