@@ -7,4 +7,4 @@ Users SSH into a server, which runs the client. The client connects to the game 
 Only NixOS is supported. Add the flake as an input and enable the relevant service.
 
 ## Development
-Run `nix develop` to download the appropriate dependencies.
+Run `nix develop` to be placed into a shell with the relevant dependencies.
