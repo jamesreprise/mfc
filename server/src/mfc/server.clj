@@ -1,6 +1,6 @@
 (ns mfc.server
   (:require
-   [mfc.game :refer [new-game turn]]
+   [mfc.game :refer [new-game]]
    [clojure.tools.logging :as log]
    [cheshire.core :as cheshire]
    [org.httpkit.server :as http-server]
