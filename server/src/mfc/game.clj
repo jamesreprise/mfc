@@ -68,7 +68,9 @@
   (into {} (map (fn [p] {(key p) (merge {:bux 1500 :position 0} (val p))}) players)))
 
 (defn create-order [players]
-  (shuffle (keys players)))
+  (-> players
+      (keys)
+      (shuffle)))
 
 (defn new-game [players]
   {:players (new-players players)
