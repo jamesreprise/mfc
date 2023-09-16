@@ -1,1 +1,5 @@
-#kaocha/v1 {}
+#kaocha/v1
+ {:tests [{:id :integration
+           :test-paths ["test/mfc_test"]
+           :ns-patterns [".*"]
+           :reporter kaocha.report.progress/report}]}
