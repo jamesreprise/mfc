@@ -43,7 +43,7 @@
    38 :tax/super
    39 :navy/two})
 
-(defn move [pos roll]
+(defn new-pos [pos roll]
   (mod (+ pos (apply + roll)) 40))
 
 (defn die-roll []
@@ -56,17 +56,17 @@
   (get (:players game) (get (:order game) (:current-player game))))
 
 (defn move-current-player-to [game pos]
-  (assoc-in game [(current-player game) :position] pos))
+  (assoc-in game [:players (current-player game) :position] pos))
 
 (defn roll [game]
-  (move-current-player-to game (move (:position (current-player game)) (dice-roll))))
+  (move-current-player-to game (new-pos (:position (current-player game)) (dice-roll))))
 
 (defn land [_]
   #(identity %))
 
 (defn take-turn
   ([game]
-   take-turn game {:doubles false :count 0})
+   (take-turn game {:doubles false :count 0}))
   ([game double-info]
    (cond (>= 3 (:count double-info)) (move-current-player-to game -1)
          :else (roll game))
