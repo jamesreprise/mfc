@@ -43,14 +43,32 @@
    38 :tax/super
    39 :navy/two})
 
-(defn roll [pos]
-  (mod (+ pos (+ 1 (rand-int 6))) 40))
+(defn move [pos roll]
+  (mod (+ pos (apply + roll)) 40))
+
+(defn die-roll []
+  (+ 1 (rand-int 6)))
+
+(defn dice-roll []
+  (list (die-roll) (die-roll)))
+
+(defn current-player [game]
+  (get (:players game) (get (:order game) (:current-player game))))
+
+(defn roll [game]
+  (move (:position (current-player game)) (dice-roll)))
 
 (defn land [_]
   #(identity %))
 
-(defn current-player [game]
-  (get (:players game) (get (:order game) (:current-player game))))
+(defn move-current-player-to [game pos]
+  (assoc-in game [(current-player game) :position] pos))
+
+(defn take-turn 
+  ([game]
+   take-turn game {:doubles false :count 0})
+  ([game double-info]
+   (if (>= 3 (:count double-info)) (move-current-player-to game -1) )))
 
 (defn increment-turn-counter [game]
   (update game :turn + 1))
@@ -60,7 +78,7 @@
 
 (defn turn [game]
   (-> game
-      ((land (roll (:position (current-player game)))))
+      take-turn
       increment-turn-counter
       next-player))
 
