@@ -55,20 +55,22 @@
 (defn current-player [game]
   (get (:players game) (get (:order game) (:current-player game))))
 
+(defn move-current-player-to [game pos]
+  (assoc-in game [(current-player game) :position] pos))
+
 (defn roll [game]
-  (move (:position (current-player game)) (dice-roll)))
+  (move-current-player-to game (move (:position (current-player game)) (dice-roll))))
 
 (defn land [_]
   #(identity %))
 
-(defn move-current-player-to [game pos]
-  (assoc-in game [(current-player game) :position] pos))
-
-(defn take-turn 
+(defn take-turn
   ([game]
    take-turn game {:doubles false :count 0})
   ([game double-info]
-   (if (>= 3 (:count double-info)) (move-current-player-to game -1) )))
+   (cond (>= 3 (:count double-info)) (move-current-player-to game -1)
+         :else (roll game))
+   (when (:doubles double-info) (take-turn game {:doubles true :count (inc (:count double-info))}))))
 
 (defn increment-turn-counter [game]
   (update game :turn + 1))
