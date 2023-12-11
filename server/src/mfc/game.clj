@@ -97,3 +97,6 @@
    :order (create-order players)
    :current-player 0
    :turn 0})
+
+(defn example-2p-game []
+  (new-game {"p1" {:piece :car} "p2" {:piece :hat}}))

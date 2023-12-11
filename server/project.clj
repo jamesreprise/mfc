@@ -4,12 +4,12 @@
             :url "https://www.gnu.org/licenses/agpl-3.0.en.html"}
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [org.clojure/core.async "1.6.673"]
-                 [org.clojure/core.incubator "0.1.4"]
+                ;;  [org.clojure/core.incubator "0.1.4"]
                  [org.clojure/tools.logging "1.2.4"]
                  [ch.qos.logback/logback-classic "1.4.11"]
+                 [io.pedestal/pedestal.jetty "0.6.1"]
                  [ring "1.10.0"]
                  [compojure "1.7.0"]
-                 [http-kit "2.3.0"]
                  [cheshire "5.11.0"]]
   :main mfc.server
   :aot [mfc.server]
