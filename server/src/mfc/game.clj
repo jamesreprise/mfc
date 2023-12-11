@@ -70,10 +70,10 @@
   ([game double-info]
    (cond (>= 3 (:count double-info)) (move-current-player-to game -1)
          :else (roll game))
-   (when (:doubles double-info) (take-turn game {:doubles true :count (inc (:count double-info))}))))
+   (when (:doubles double-info) (take-turn game (update double-info :count inc)))))
 
 (defn increment-turn-counter [game]
-  (update game :turn + 1))
+  (update game :turn inc))
 
 (defn next-player [game]
   (assoc game :current-player (mod (+ 1 (:current-player game)) (count (:order game)))))
